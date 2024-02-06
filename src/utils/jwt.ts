@@ -2,7 +2,7 @@ import * as jwt from "jsonwebtoken";
 import { OUser } from "../dto/user.dto";
 import { SECRET_TOKEN } from "../secret";
 
-type DecodeToken = {
+export type Payload = {
   id: string;
   email: string;
 };
@@ -17,7 +17,7 @@ export const jwtToken = async (user: OUser) => {
   return jwt.sign(payload, SECRET_TOKEN as string);
 };
 
-export const decodeToken = async (token: string) => {
-  const decode = jwt.verify(token, SECRET_TOKEN as string) as DecodeToken;
+export const decodeToken = async (token: any) => {
+  const decode = jwt.verify(token, SECRET_TOKEN as string) as Payload;
   return decode;
 };
